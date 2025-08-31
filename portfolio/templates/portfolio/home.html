@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio showcasing my education, experience, projects, and skills">
+    <meta name="keywords" content="portfolio, resume, professional, developer, experience, projects, skills">
+    <meta name="author" content="Your Name">
+    <title>My Portfolio - Professional Resume</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/animations.css' %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'portfolio/favicon.ico' %}">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <link rel="manifest" href="{% static 'portfolio/manifest.json' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>My Portfolio</h1>
+            <p class="subtitle">Professional Resume & Experience</p>
+        </header>
+
+        <section class="section animate-fadeInUp delay-100">
+            <h2>Education</h2>
+            {% for edu in education %}
+                <div class="card hover-scale">
+                    <h3>{{edu.degree}}</h3>
+                    <p><strong>Institution:</strong> {{edu.instituion}}</p>
+                    <p class="meta">{{edu.start_year}} - {{edu.end_year}}</p>
+                </div>
+            {% empty %}
+                <p>No education information available.</p>
+            {% endfor %}
+        </section>
+
+        <section class="section animate-fadeInUp delay-200">
+            <h2>Experience</h2>
+            {% for exp in experience %}
+                <div class="card hover-scale">
+                    <h3>{{exp.title}}</h3>
+                    <p><strong>Company:</strong> {{exp.company}}</p>
+                    <p class="meta">{{exp.start_date}} - {{exp.end_date}}</p>
+                    <p>{{exp.description}}</p>
+                </div>
+            {% empty %}
+                <p>No experience information available.</p>
+            {% endfor %}
+        </section>
+
+        <section class="section animate-fadeInUp delay-300">
+            <h2>Projects</h2>
+            {% for proj in projects %}
+                <div class="card hover-scale">
+                    <h3>
+                        {% if proj.link %}
+                            <a href="{{proj.link}}" class="project-link" target="_blank" rel="noopener noreferrer">{{proj.title}}</a>
+                        {% else %}
+                            {{proj.title}}
+                        {% endif %}
+                    </h3>
+                    <p>{{proj.description}}</p>
+                </div>
+            {% empty %}
+                <p>No projects available.</p>
+            {% endfor %}
+        </section>
+
+        <section class="section animate-fadeInUp delay-400">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                    <div class="skill-item hover-pulse">
+                        <h4>{{skill.name}}</h4>
+                        <p class="proficiency">{{skill.proficiency}}</p>
+                    </div>
+                {% empty %}
+                    <p>No skills information available.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="{% static 'portfolio/js/main.js' %}"></script>
+    <script src="{% static 'portfolio/js/enhanced.js' %}"></script>
+</body>
+</html>
